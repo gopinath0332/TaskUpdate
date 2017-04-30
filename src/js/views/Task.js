@@ -9,14 +9,22 @@ import { getTasks, addTask } from "../action/action";
 export default class Task extends Component {
 	componentWillMount() {
 		this.props.dispatch(getTasks());
-		// this.getData();
 	}
-	getData() {
-		// app.database().ref("/").once("value").then((response) => {
-		// 	console.debug("firebase response", response.val());
-		// });
+	addTask() {
+		let value = this.task.value;
+		let payload = {
+			task: value,
+			comment: value
+		};
+		this.props.dispatch(addTask(payload));
 	}
 	render() {
-		return (<div>Test task component123 - {this.props.list}</div>);
+		console.debug(this.props);
+		return (
+			<div>
+				<input type="text" className="form-control" ref={node => this.task = node} />
+				<button className="btn btn-default" onClick={this.addTask.bind(this)} >Add Task</button>
+			</div>
+		);
 	}
 }

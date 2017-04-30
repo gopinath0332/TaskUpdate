@@ -1,25 +1,11 @@
-import { ADD_TASK, GET_TASKS } from "../types/actionTypes";
 import axios from "axios";
-import database from "../config/firebase";
 
+import { ADD_FAIL, ADD_TASK, GET_TASKS } from "../types/actionTypes";
 
-export function getTasks1() {
+export function getTasks() {
 	return {
 		type: GET_TASKS,
 		payload: axios.get("../../data/task.json")
-	};
-}
-
-export function getTasks() {
-	return dispatch => {
-		database.ref().once("value").then((response) => {
-			dispatch({
-				type: GET_TASKS,
-				payload: response.val()
-			});
-		}).catch((e)=>{
-			console.error("Error in fetching list",e);
-		});
 	};
 }
 
